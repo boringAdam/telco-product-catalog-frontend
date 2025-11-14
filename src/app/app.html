@@ -36,7 +36,11 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let p of products">
+    <tr
+      *ngFor="let p of products"
+      [class.invalid]="!p.valid"
+      [title]="p.valid ? '' : p.validationErrors.join(', ')"
+    >
       <td>{{ p.sku }}</td>
       <td>{{ p.name }}</td>
       <td>{{ p.manufacturer }}</td>
