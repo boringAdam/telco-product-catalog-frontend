@@ -1,59 +1,75 @@
-# TelcoProductCatalogUi
+# Telco Product Catalog – Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+This repository contains the Angular-based user interface for the Telco Product Catalog backend API.
 
-## Development server
+The application displays products, allows filtering, sorting, and toggling valid-only mode.  
+It is built with Angular, served through Nginx, and fully dockerized.
 
-To start a local development server, run:
+## Requirements
 
-```bash
-ng serve
+- Docker
+- (Optional) Node.js 20+ and npm if running in development mode
+
+## Running the frontend using Docker (production mode)
+
+Build the image:
+
+```
+docker build -t telco-frontend .
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Run the container:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+docker run --rm -p 4200:80 telco-frontend
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application will be available at:
 
-```bash
-ng generate --help
+```
+http://localhost:4200
 ```
 
-## Building
+## Running full stack (frontend + backend) with Docker Compose
 
-To build the project run:
+The Docker Compose file is located in the backend repository.
 
-```bash
-ng build
+From the backend project directory:
+
+```
+docker compose up --build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+After startup:
 
-## Running unit tests
+- Frontend: http://localhost
+- Backend: http://localhost:8080
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+The frontend communicates with the backend via the internal service name:
 
-```bash
-ng test
+```
+http://backend:8080
 ```
 
-## Running end-to-end tests
+## Running the Angular app in development mode
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+npm install
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The dev server runs at:
 
-## Additional Resources
+```
+http://localhost:4200
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Make sure the backend runs at `http://localhost:8080`.
+
+## Project structure
+
+- `src/app/app.ts` – root Angular component
+- `src/app/services/product.service.ts` – API client service
+- `src/app/app.html` – template used for rendering the product list
+- `Dockerfile` – production build using Nginx
+- `nginx.conf` – reverse proxy configuration for backend calls
