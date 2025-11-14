@@ -1,0 +1,75 @@
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  input,
+  select {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 220px;
+  }
+
+  label {
+    font-size: 14px;
+    user-select: none;
+  }
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
+}
+
+:host {
+  display: block;
+  padding: 32px;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: #eceff1;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.15);
+
+  th {
+    background: #e2e8f0;
+  }
+
+  tr:hover td {
+    background: #f8fafc;
+  }
+}
+
+tr.invalid td {
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.error {
+  color: #b00020;
+  font-weight: bold;
+  margin-top: 10px;
+}

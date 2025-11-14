@@ -1,58 +1,52 @@
-<div class="products-page">
-  <h1>Products</h1>
+<h1>Products</h1>
 
-  <div class="filters">
-    <input
-      type="text"
-      placeholder="Search by name / SKU / manufacturer / EAN..."
-      [(ngModel)]="filter"
-      (ngModelChange)="onFilterChange()"
-    />
+<div class="controls">
+  <input
+    type="text"
+    placeholder="Search by name / SKU / manufacturer"
+    [(ngModel)]="filter"
+    (input)="onFilterChange()"
+  />
 
-    <select [(ngModel)]="sort" (change)="onSortChange()">
-      <option value="name,asc">Name ↑</option>
-      <option value="name,desc">Name ↓</option>
-      <option value="price,asc">Price ↑</option>
-      <option value="price,desc">Price ↓</option>
-      <option value="updatedAt,desc">Updated (newest)</option>
-      <option value="updatedAt,asc">Updated (oldest)</option>
-    </select>
+  <select [(ngModel)]="sort" (change)="onSortChange()">
+    <option value="name,asc">Name ↑</option>
+    <option value="name,desc">Name ↓</option>
+    <option value="price,asc">Price ↑</option>
+    <option value="price,desc">Price ↓</option>
+  </select>
 
-    <label>
-      <input type="checkbox" [(ngModel)]="onlyValid" (change)="onOnlyValidChange()" />
-      Only valid
-    </label>
-  </div>
-
-  <div *ngIf="loading">Loading...</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
-
-  <table *ngIf="!loading && products.length" class="products-table">
-    <thead>
-      <tr>
-        <th>SKU</th>
-        <th>Name</th>
-        <th>Manufacturer</th>
-        <th>Price (HUF)</th>
-        <th>Stock</th>
-        <th>EAN</th>
-        <th>Source</th>
-        <th>Updated</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of products">
-        <td>{{ p.sku }}</td>
-        <td>{{ p.name }}</td>
-        <td>{{ p.manufacturer || '—' }}</td>
-        <td>{{ p.finalPriceHuf | number : '1.0-0' }}</td>
-        <td>{{ p.stock ?? '—' }}</td>
-        <td>{{ p.ean || '—' }}</td>
-        <td>{{ p.source }}</td>
-        <td>{{ p.updatedAt | date : 'yyyy-MM-dd HH:mm' }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="!loading && !products.length && !error">No products found.</div>
+  <label>
+    Only valid
+    <input type="checkbox" [(ngModel)]="onlyValid" (change)="onOnlyValidChange()" />
+  </label>
 </div>
+
+<table *ngIf="products.length > 0">
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Name</th>
+      <th>Manufacturer</th>
+      <th>Price (HUF)</th>
+      <th>Stock</th>
+      <th>EAN</th>
+      <th>Source</th>
+      <th>Updated</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{ p.sku }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.manufacturer }}</td>
+      <td>{{ p.finalPriceHuf | number }}</td>
+      <td>{{ p.stock ?? '—' }}</td>
+      <td>{{ p.ean ?? '—' }}</td>
+      <td>{{ p.source }}</td>
+      <td>{{ p.updatedAt | date : 'yyyy-MM-dd HH:mm' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="error" class="error">{{ error }}</div>
